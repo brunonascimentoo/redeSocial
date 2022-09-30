@@ -2,8 +2,10 @@ import { Header } from './components/Header'
 import { Post } from './components/Post'
 import { Sidebar } from './components/Sidebar'
 import './global.css'
-
+import { createContext } from 'react'
 import styles from './App.module.css'
+import { useState } from 'react'
+import ReactSwitch from 'react-switch'
 
 const posts = [
   {
@@ -37,29 +39,45 @@ const posts = [
   },
 ];
 
+export const ThemeContext = createContext(null)
+
 export function App() {
 
+  const [theme, setTheme] = useState("dark")
+
+  const toggleTheme = () => {
+    setTheme((curr) => (curr === "light" ? "dark" : "light"));
+  };
+
   return (
-    <div>
-      <Header />
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
 
-      <div className={styles.wrapper}>
-        <Sidebar />
-        <main>
-          {posts.map(post => {
-            return (
-              <Post
-                key={post.id}
-                author={post.author}
-                content={post.content}
-                publishedAt={post.publishedAt}
-              />
-            )
-          })}
-        </main>
+
+      <div id={theme}>
+
+        <Header />
+        <div className={styles.btnToggle}>
+          <ReactSwitch onChange={toggleTheme} checked={theme === "dark"} />
+        </div>
+
+        <div className={styles.wrapper}>
+          <Sidebar />
+          <main>
+            {posts.map(post => {
+              return (
+                <Post
+                  key={post.id}
+                  author={post.author}
+                  content={post.content}
+                  publishedAt={post.publishedAt}
+                />
+              )
+            })}
+          </main>
+        </div>
+
       </div>
-
-    </div>
+    </ThemeContext.Provider>
   )
 }
 
