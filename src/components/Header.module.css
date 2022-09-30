@@ -1,0 +1,30 @@
+.header {
+  background-color: var(--gray-800);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 2rem;
+}
+
+.header .boxSunAndMoon .buttonOnChange {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.header .boxSunAndMoon .logoSun {
+  color: var(--yellow);
+  width: 1.5rem;
+  height: 1.5rem;
+  display: none;
+}
+
+.header .boxSunAndMoon .logoMoon {
+  color: var(--gray-100);
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.header img {
+  height: 5.5rem;
+}
